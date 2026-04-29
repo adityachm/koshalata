@@ -103,7 +103,7 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 .hero-bg {
   position: absolute; inset: 0;
   background-image: url('img/hero.jpg');
-  background-size: cover; background-position: center 40%;
+  background-size: cover; background-position: center 30%;
   animation: hzoom 10s ease forwards;
 }
 @keyframes hzoom { from { transform: scale(1.06); } to { transform: scale(1); } }
@@ -112,9 +112,9 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
   position: absolute; inset: 0;
   background: linear-gradient(
     160deg,
-    rgba(30,7,16,.45) 0%,
-    rgba(60,15,26,.2) 50%,
-    rgba(20,5,12,.38) 100%
+    rgba(30,7,16,.58) 0%,
+    rgba(60,15,26,.32) 50%,
+    rgba(20,5,12,.50) 100%
   );
 }
 
