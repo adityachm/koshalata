@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Koshalata — The Poetry of Rare Craftsmanship</title>
+  <meta name="description" content="Koshalata — Handcrafted sarees of rare artistry."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <img src="small logo.PNG" alt="Koshalata" class="nav-k" onclick="scrollToTop()"/>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#sarees">Sarees</a></li>
+    <li><a href="#craft">Craft</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <a class="btn-wa" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20your%20saree%20collection." target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a class="btn-ring" href="tel:+919999999999">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      Call
+    </a>
+  </div>
+  <div class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-body">
+    <img src="small logo.PNG" alt="Koshalata" class="hero-k"/>
+    <p class="hero-brand">Koshalata</p>
+    <h1 class="hero-title">The Poetry of<br/><em>Rare Craftsmanship</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">Handwoven Sarees · Timeless Heritage · Pure Artistry</p>
+    <div class="hero-btns">
+      <a href="#collections" class="cta-gold">Explore Collections</a>
+      <a href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20please%20share%20your%20saree%20catalogue." class="cta-ghost" target="_blank" rel="noopener">Shop on WhatsApp</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-ln"></div><span>Scroll</span></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-row">
+    <span>The Poetry of Rare Craftsmanship</span>
+    <span class="d">Handwoven Heritage</span>
+    <span class="d">Banarasi Brocade</span>
+    <span class="d">Kanjivaram Silk</span>
+    <span class="d">Bridal Sarees</span>
+    <span class="d">Zari &amp; Resham</span>
+    <span class="d">The Poetry of Rare Craftsmanship</span>
+    <span class="d">Handwoven Heritage</span>
+    <span class="d">Banarasi Brocade</span>
+    <span class="d">Kanjivaram Silk</span>
+    <span class="d">Bridal Sarees</span>
+    <span class="d">Zari &amp; Resham</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="philo">
+  <div class="philo-gem">◆ &nbsp; ◆ &nbsp; ◆</div>
+  <p class="philo-q">"A saree is not merely worn — it is <span>inhabited</span>. It carries within its threads the patience of the loom and the poetry of the artisan's soul."</p>
+  <p class="philo-attr">— The Koshalata Philosophy</p>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-img-wrap">
+    <img src="img/story.jpg" alt="Saree artistry" loading="lazy"/>
+    <div class="story-badge">
+      <small>Est.</small>
+      <big>2024</big>
+      <span>Handcrafted Heritage</span>
+    </div>
+  </div>
+  <div class="story-text rv">
+    <p class="tag">Our Story</p>
+    <h2 class="serif on-dark">Born from the<br/><em>loom's poetry</em></h2>
+    <p class="story-body">Koshalata was founded on one belief — that India's rarest weaving traditions deserve to be worn, celebrated, and passed down. We travel to the heart of India's loom clusters to bring you sarees that carry the soul of their origin.<br/><br/>Every saree is a conversation between the weaver's hands and the wearer's grace.</p>
+    <div class="pillars">
+      <div class="pillar"><h4>Rare Weaves</h4><p>Banarasi, Kanjivaram, Chanderi, Tussar — sourced from master weavers.</p></div>
+      <div class="pillar"><h4>Bridal Artistry</h4><p>Bespoke bridal sarees crafted to your vision and legacy.</p></div>
+      <div class="pillar"><h4>Pure Silk &amp; Zari</h4><p>Real silk, pure zari, natural dyes — no compromise on authenticity.</p></div>
+      <div class="pillar"><h4>Direct Service</h4><p>WhatsApp ordering with blouse stitching &amp; fall-pico included.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="col-hd">
+    <div>
+      <p class="tag" style="color:var(--g-d)"><span style="display:inline-block;width:28px;height:1px;background:var(--g-d);opacity:.7;margin-right:14px;vertical-align:middle"></span>The Collections</p>
+      <h2 class="serif on-light" style="margin-top:14px">Sarees that speak<br/><em>before you do</em></h2>
+    </div>
+    <a href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20please%20share%20the%20full%20catalogue." target="_blank" rel="noopener">Full Catalogue <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+  <div class="col-grid">
+    <div class="col-card rv">
+      <img src="img/col1.jpg" alt="Banarasi Brocade" loading="lazy"/>
+      <div class="col-veil"></div><div class="col-frame"></div>
+      <div class="col-info">
+        <p class="col-type">Heritage Silks</p>
+        <h3 class="col-name">Banarasi<br/>Brocade</h3>
+        <a class="col-link" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Banarasi%20Brocade%20collection." target="_blank" rel="noopener">Enquire Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="col-card rv">
+      <img src="img/col2.jpg" alt="Bridal Kanjivaram" loading="lazy"/>
+      <div class="col-veil"></div><div class="col-frame"></div>
+      <div class="col-info">
+        <p class="col-type">Bridal Couture</p>
+        <h3 class="col-name">Kanjivaram<br/>Bridal</h3>
+        <a class="col-link" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20Kanjivaram%20Bridal." target="_blank" rel="noopener">Enquire Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div class="col-card rv">
+      <img src="img/saree5.jpg" alt="Signature Drapes" loading="lazy"/>
+      <div class="col-veil"></div><div class="col-frame"></div>
+      <div class="col-info">
+        <p class="col-type">Contemporary</p>
+        <h3 class="col-name">Signature<br/>Drapes</h3>
+        <a class="col-link" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Signature%20Drapes." target="_blank" rel="noopener">Enquire Now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-pad"></div>
+</section>
+
+<!-- EDITORIAL -->
+<div class="editorial">
+  <div class="ed-bg"><img src="img/saree4.jpg" alt="Koshalata editorial" loading="lazy"/></div>
+  <div class="ed-veil"></div>
+  <div class="ed-body rv">
+    <img src="small logo.PNG" alt="Koshalata" class="ed-k"/>
+    <p class="ed-q">"In every thread there is a <span>conversation</span><br/>between the weaver's hands and the wearer's grace."</p>
+    <p class="ed-attr">Koshalata · The Poetry of Rare Craftsmanship</p>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="sarees">
+  <div class="prod-hd rv">
+    <p class="tag" style="justify-content:center;color:var(--g)"><span style="display:inline-block;width:28px;height:1px;background:var(--g);opacity:.7;margin-right:14px;vertical-align:middle"></span>New Arrivals</p>
+    <h2 class="serif on-dark" style="margin-top:14px">The latest<br/><em>from our looms</em></h2>
+  </div>
+
+  <div class="prod-grid">
+    <!-- Product 1 -->
+    <div class="prod-card rv">
+      <div class="prod-card-img">
+        <span class="prod-badge">New</span>
+        <img src="img/col1.jpg" alt="Crimson Banarasi" loading="lazy"/>
+        <div class="prod-veil"></div>
+        <div class="prod-corners"></div>
+        <div class="prod-over">
+          <p class="prod-type">Banarasi Silk</p>
+          <h3 class="prod-name">Crimson Brocade</h3>
+          <p class="prod-price">₹14,999</p>
+        </div>
+        <a class="prod-enquire" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Crimson%20Banarasi%20Brocade." target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="prod-card rv">
+      <div class="prod-card-img">
+        <span class="prod-badge">Bridal Pick</span>
+        <img src="img/col2.jpg" alt="Ivory Kanjivaram" loading="lazy"/>
+        <div class="prod-veil"></div>
+        <div class="prod-corners"></div>
+        <div class="prod-over">
+          <p class="prod-type">Kanjivaram Silk</p>
+          <h3 class="prod-name">Ivory Kanjivaram</h3>
+          <p class="prod-price"><s>₹28,999</s> ₹24,499</p>
+        </div>
+        <a class="prod-enquire" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Ivory%20Kanjivaram." target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="prod-card rv">
+      <div class="prod-card-img">
+        <span class="prod-badge">Limited</span>
+        <img src="img/saree3.jpg" alt="Heritage Chanderi" loading="lazy"/>
+        <div class="prod-veil"></div>
+        <div class="prod-corners"></div>
+        <div class="prod-over">
+          <p class="prod-type">Chanderi</p>
+          <h3 class="prod-name">Heritage Chanderi</h3>
+          <p class="prod-price">₹9,499</p>
+        </div>
+        <a class="prod-enquire" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Heritage%20Chanderi." target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="prod-card rv">
+      <div class="prod-card-img">
+        <img src="img/saree6.jpg" alt="Tussar Drape" loading="lazy"/>
+        <div class="prod-veil"></div>
+        <div class="prod-corners"></div>
+        <div class="prod-over">
+          <p class="prod-type">Tussar Silk</p>
+          <h3 class="prod-name">Tussar Drape</h3>
+          <p class="prod-price">₹11,499</p>
+        </div>
+        <a class="prod-enquire" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20the%20Tussar%20Silk%20Saree." target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod-cta rv">
+    <a href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20please%20share%20the%20full%20saree%20catalogue." class="cta-gold" target="_blank" rel="noopener">View Full Catalogue on WhatsApp</a>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft">
+  <div class="craft-img">
+    <img src="img/craft.jpg" alt="Handloom weaving" loading="lazy"/>
+  </div>
+  <div class="craft-text rv">
+    <p class="tag">The Craft</p>
+    <h2 class="serif on-dark">Woven with<br/><em>generations of knowing</em></h2>
+    <div class="craft-steps">
+      <div class="craft-step"><span class="step-n">01</span><div class="step-b"><h3>Silk &amp; Yarn Selection</h3><p>Mulberry silk, pure zari, and natural dyes — sourced from India's finest weaving districts.</p></div></div>
+      <div class="craft-step"><span class="step-n">02</span><div class="step-b"><h3>Motif &amp; Pattern Design</h3><p>Classical paisleys, temple borders, and florals drawn from centuries of weaving manuscripts.</p></div></div>
+      <div class="craft-step"><span class="step-n">03</span><div class="step-b"><h3>Master Weaving</h3><p>Woven on handlooms by artisans whose craft has been passed through generations, not machines.</p></div></div>
+      <div class="craft-step"><span class="step-n">04</span><div class="step-b"><h3>Finishing &amp; Delivery</h3><p>Fall-pico, custom blouse stitching, and careful packaging — every saree arrives worthy of its story.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi" id="testimonials">
+  <div class="testi-hd rv">
+    <p class="tag" style="justify-content:center;color:var(--g-d)"><span style="display:inline-block;width:28px;height:1px;background:var(--g-d);opacity:.7;margin-right:14px;vertical-align:middle"></span>Their Words</p>
+    <h2 class="serif on-light" style="margin-top:14px">The women who<br/><em>wore the poetry</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card rv">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"I wore the Crimson Brocade to my niece's wedding. The zari work glowed under the evening lights — every woman in the hall wanted to know where I bought it. Koshalata is something entirely different."</p>
+      <p class="testi-name">Meera Iyer</p><p class="testi-city">Chennai</p>
+    </div>
+    <div class="testi-card rv">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"My bridal Kanjivaram from Koshalata was the most beautiful thing I've ever worn. The team guided me through every detail on WhatsApp — the blouse, the fall, the draping. Absolutely unmatched."</p>
+      <p class="testi-name">Priya Nair</p><p class="testi-city">Bengaluru</p>
+    </div>
+    <div class="testi-card rv">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-q">"The Heritage Chanderi is so light it feels like wearing air — yet the craftsmanship is so intricate you could study it for hours. I now own three Koshalata sarees and each one tells its own story."</p>
+      <p class="testi-name">Ananya Sharma</p><p class="testi-city">Mumbai</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="rv">
+      <p class="tag">Get in Touch</p>
+      <h2 class="serif on-dark">Begin your<br/><em>saree story</em></h2>
+      <p class="contact-desc">Connect with us on WhatsApp or call directly. Our team will guide you through every collection, help with sizing, and ensure your saree is finished exactly as you envision.</p>
+      <a class="ch ch-wa" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27d%20like%20to%20enquire%20about%20your%20saree%20collections." target="_blank" rel="noopener">
+        <div class="ch-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div class="ch-mt"><h4>WhatsApp Us</h4><strong>+91 99999 99999</strong></div>
+      </a>
+      <a class="ch ch-ph" href="tel:+919999999999">
+        <div class="ch-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="#C49A3C"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div class="ch-mt"><h4>Call Us</h4><strong>+91 99999 99999</strong></div>
+      </a>
+    </div>
+    <div class="rv">
+      <span class="form-lbl">Send an Enquiry</span>
+      <form onsubmit="sendWA(event)">
+        <div class="fg-2">
+          <div class="fg"><label>Name</label><input type="text" id="fn" placeholder="Your name" required/></div>
+          <div class="fg"><label>Phone</label><input type="tel" id="ph" placeholder="+91 XXXXX XXXXX" required/></div>
+        </div>
+        <div class="fg">
+          <label>I'm Looking For</label>
+          <select id="it">
+            <option value="">Select</option>
+            <option>Banarasi Brocade</option>
+            <option>Kanjivaram Bridal Saree</option>
+            <option>Chanderi / Tussar Saree</option>
+            <option>Bespoke Bridal Order</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea id="mg" placeholder="Occasion, colour, size, budget…"></textarea></div>
+        <button type="submit" class="btn-submit">Send via WhatsApp →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-rule"></div>
+  <div class="foot-grid">
+    <div>
+      <img src="small logo.PNG" alt="Koshalata" class="foot-k"/>
+      <p class="foot-sub">The Poetry of Rare Craftsmanship</p>
+      <div class="socs">
+        <a href="#" class="soc" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="#" class="soc" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://wa.me/919999999999" class="soc" aria-label="WhatsApp" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-col"><h4>Collections</h4><ul><li><a href="#collections">Banarasi Brocade</a></li><li><a href="#collections">Kanjivaram Bridal</a></li><li><a href="#collections">Signature Drapes</a></li><li><a href="#sarees">New Arrivals</a></li><li><a href="#contact">Bespoke Orders</a></li></ul></div>
+    <div class="foot-col"><h4>Information</h4><ul><li><a href="#story">Our Story</a></li><li><a href="#craft">Craftsmanship</a></li><li><a href="#contact">Saree Care Guide</a></li><li><a href="#contact">Blouse Stitching</a></li><li><a href="#contact">Returns Policy</a></li></ul></div>
+    <div class="foot-col"><h4>Contact</h4><ul><li><a href="https://wa.me/919999999999" target="_blank">WhatsApp Us</a></li><li><a href="tel:+919999999999">+91 99999 99999</a></li><li><a href="mailto:hello@koshalata.in">hello@koshalata.in</a></li></ul></div>
+  </div>
+  <div class="foot-btm">
+    <p class="foot-cp">© 2026 Koshalata. All rights reserved.</p>
+    <p class="foot-cp">The Poetry of Rare Craftsmanship ◆ Made in India</p>
+  </div>
+</footer>
+
+<!-- FLOATS -->
+<div class="floats">
+  <a class="fb fb-ph" href="tel:+919999999999" aria-label="Call">
+    <span class="fb-tip">Call Us</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#3C0F1A"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+  <a class="fb fb-wa" href="https://wa.me/919999999999?text=Hello%20Koshalata%2C%20I%27d%20like%20to%20enquire%20about%20your%20saree%20collections." target="_blank" rel="noopener" aria-label="WhatsApp">
+    <span class="fb-tip">WhatsApp</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
