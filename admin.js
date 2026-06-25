@@ -303,3 +303,5 @@ async function deleteSaree(id, name) {
 // ── Init ───────────────────────────────────────────────────────────────────
 SECRET = '';
 localStorage.removeItem('kosh_admin_secret');
+loginScreen.hidden = false;
+dashboard.hidden = true;

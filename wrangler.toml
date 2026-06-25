@@ -10,3 +10,6 @@ database_id = "277dd6ba-f981-41f2-8582-247384f285bf"
 [[r2_buckets]]
 binding = "IMAGES"
 bucket_name = "koshalata-images"
+
+[vars]
+R2_PUBLIC_URL = "https://pub-11c2f0e550a244eba083af3b5b5dc56f.r2.dev"
