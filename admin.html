@@ -6,6 +6,8 @@
   <title>Koshalata Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
+  
+  <link rel="icon" type="image/png" href="logo.png"/>
   <link rel="stylesheet" href="admin.css"/>
 </head>
 <body>
@@ -35,6 +37,28 @@
   </header>
 
   <main class="adm-main">
+
+    <!-- Cover Photo -->
+    <div class="settings-card">
+      <div class="settings-card-hd">
+        <div>
+          <h2 class="settings-title">Cover Photo</h2>
+          <p class="settings-sub">The full-screen background on the homepage hero</p>
+        </div>
+        <button class="btn-outline" id="cover-upload-btn">Upload New Photo</button>
+        <input type="file" id="cover-input" accept="image/jpeg,image/png,image/webp" hidden/>
+      </div>
+      <div id="cover-preview-wrap" class="cover-preview-wrap">
+        <div class="cover-preview-empty" id="cover-preview-empty">No custom cover — showing default hero image</div>
+        <img id="cover-preview-img" hidden/>
+      </div>
+      <div id="cover-status-bar" class="upload-status-bar" hidden>
+        <div class="upload-bar"><div class="upload-fill" id="cover-fill"></div></div>
+        <span id="cover-status">Uploading…</span>
+      </div>
+      <div id="cover-err" class="err-msg" hidden></div>
+    </div>
+
     <div class="adm-top">
       <h1>Saree Listings</h1>
       <button class="btn-primary" id="add-btn">+ Add Saree</button>

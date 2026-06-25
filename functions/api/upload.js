@@ -35,7 +35,8 @@ export async function onRequest(context) {
     return new Response('Only JPG, PNG, or WEBP images are allowed', { status: 400, headers: CORS });
   }
 
-  const key = `sarees/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+  const prefix = ['sarees', 'covers'].includes(formData.get('prefix')) ? formData.get('prefix') : 'sarees';
+  const key = `${prefix}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
   await env.IMAGES.put(key, file.stream(), {
     httpMetadata: { contentType: file.type },
   });

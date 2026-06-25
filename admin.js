@@ -26,6 +26,16 @@ const uploadStatusBar = document.getElementById('upload-status-bar');
 const uploadFill    = document.getElementById('upload-fill');
 const uploadStatus  = document.getElementById('upload-status');
 
+// Cover photo elements
+const coverUploadBtn  = document.getElementById('cover-upload-btn');
+const coverInput      = document.getElementById('cover-input');
+const coverPreviewImg = document.getElementById('cover-preview-img');
+const coverEmpty      = document.getElementById('cover-preview-empty');
+const coverStatusBar  = document.getElementById('cover-status-bar');
+const coverFill       = document.getElementById('cover-fill');
+const coverStatusTxt  = document.getElementById('cover-status');
+const coverErr        = document.getElementById('cover-err');
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 function api(path, opts = {}) {
   return fetch(path, {
@@ -76,6 +86,71 @@ function showDashboard() {
   loginScreen.hidden = true;
   dashboard.hidden = false;
   loadSarees();
+  loadCoverPhoto();
+}
+
+// ── Cover photo ────────────────────────────────────────────────────────────────
+async function loadCoverPhoto() {
+  try {
+    const res = await fetch('/api/settings');
+    if (!res.ok) return;
+    const s = await res.json();
+    setCoverPreview(s.hero_image);
+  } catch {}
+}
+
+function setCoverPreview(url) {
+  if (url) {
+    coverPreviewImg.src = url;
+    coverPreviewImg.hidden = false;
+    coverEmpty.hidden = true;
+  } else {
+    coverPreviewImg.hidden = true;
+    coverEmpty.hidden = false;
+  }
+}
+
+coverUploadBtn.addEventListener('click', () => coverInput.click());
+coverInput.addEventListener('change', () => {
+  if (coverInput.files[0]) { uploadCoverPhoto(coverInput.files[0]); coverInput.value = ''; }
+});
+
+async function uploadCoverPhoto(file) {
+  if (file.size > 10 * 1024 * 1024) { showError(coverErr, 'Cover photo must be under 10MB.'); return; }
+  clearError(coverErr);
+  coverUploadBtn.disabled = true; coverUploadBtn.textContent = 'Uploading…';
+  coverStatusBar.hidden = false; coverFill.style.width = '40%'; coverStatusTxt.textContent = 'Uploading…';
+
+  try {
+    const fd = new FormData();
+    fd.append('image', file);
+    fd.append('prefix', 'covers');
+    const upRes = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'X-Admin-Secret': SECRET },
+      body: fd,
+    });
+    if (!upRes.ok) throw new Error(await upRes.text());
+    const { url } = await upRes.json();
+
+    coverFill.style.width = '70%'; coverStatusTxt.textContent = 'Saving…';
+
+    const saveRes = await api('/api/settings', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: 'hero_image', value: url }),
+    });
+    if (!saveRes.ok) throw new Error(await saveRes.text());
+
+    coverFill.style.width = '100%'; coverStatusTxt.textContent = 'Updated ✓';
+    setCoverPreview(url);
+    setTimeout(() => { coverStatusBar.hidden = true; coverFill.style.width = '0%'; }, 1400);
+  } catch (err) {
+    showError(coverErr, 'Upload failed: ' + err.message);
+    coverStatusBar.hidden = true;
+  } finally {
+    coverUploadBtn.disabled = false; coverUploadBtn.textContent = 'Upload New Photo';
+  }
 }
 
 // ── Saree list ─────────────────────────────────────────────────────────────

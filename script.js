@@ -126,3 +126,14 @@ async function loadSarees() {
 }
 
 loadSarees();
+
+(async function applySettings() {
+  try {
+    const res = await fetch('/api/settings');
+    if (!res.ok) return;
+    const s = await res.json();
+    if (s.hero_image) {
+      document.querySelector('.hero-bg').style.backgroundImage = `url('${s.hero_image}')`;
+    }
+  } catch {}
+})();
