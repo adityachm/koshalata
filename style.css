@@ -52,7 +52,7 @@ nav {
 nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 
 .nav-k {
-  height: 110px; width: auto; cursor: pointer;
+  height: 60px; width: auto; cursor: pointer;
   transition: opacity .3s;
 }
 .nav-k:hover { opacity: .82; }
@@ -125,8 +125,8 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 }
 
 .hero-k {
-  width: 320px; height: auto;
-  margin-bottom: 32px;
+  width: 300px; height: auto;
+  margin-top: 60px; margin-bottom: 32px;
   animation: fadeUp .9s .1s ease both;
   filter: drop-shadow(0 4px 24px rgba(196,154,60,.35));
 }
@@ -563,7 +563,7 @@ footer { background:var(--m-dk); padding:80px 80px 32px; }
   .floats { bottom:20px; right:16px; }
   .pillars { grid-template-columns:1fr; }
   .fg-2 { grid-template-columns:1fr; }
-  .hero-k { width:220px; }
+  .hero-k { width:240px; }
 }
 @media (max-width:480px) {
   .foot-grid { grid-template-columns:1fr; }
