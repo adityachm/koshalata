@@ -1,0 +1,12 @@
+name = "koshalata"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "koshalata-db"
+database_id = "277dd6ba-f981-41f2-8582-247384f285bf"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "koshalata-images"
