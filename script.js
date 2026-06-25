@@ -89,7 +89,7 @@ async function loadSarees() {
     container.innerHTML = '';
 
     if (!sarees.length) {
-      container.innerHTML = '<p style="color:var(--cr);text-align:center;padding:2rem;opacity:.6">No sarees listed yet.</p>';
+      container.innerHTML = '<p style="color:var(--mu);text-align:center;padding:2rem;opacity:.6">No sarees listed yet.</p>';
       return;
     }
 
@@ -121,7 +121,7 @@ async function loadSarees() {
     });
 
   } catch {
-    container.innerHTML = '<p style="color:var(--cr);text-align:center;padding:2rem;opacity:.6">Could not load sarees. Please refresh.</p>';
+    container.innerHTML = '<p style="color:var(--mu);text-align:center;padding:2rem;opacity:.6">Could not load sarees. Please refresh.</p>';
   }
 }
 

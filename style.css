@@ -320,26 +320,26 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 .ed-attr { font-family:'Cinzel',serif; font-size:9px; letter-spacing:5px; color:rgba(196,154,60,.5); }
 
 /* ─────────────── PRODUCTS ─────────────── */
-.products { background: var(--m-dk); padding: 100px 80px; }
+.products { background: var(--cr); padding: 100px 80px; }
 .prod-hd { text-align:center; margin-bottom:72px; }
 
 .prod-grid { margin-bottom:56px; }
-.prod-loading { text-align:center; padding:3rem; color:var(--cr); opacity:.6; font-size:.9rem; letter-spacing:.08em; }
+.prod-loading { text-align:center; padding:3rem; color:var(--mu); opacity:.7; font-size:.9rem; letter-spacing:.08em; }
 .prod-cta { text-align:center; }
 
 /* ── Collection groups ── */
 .collection-group { margin-bottom:60px; }
 .collection-group-title {
   font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:400;
-  color:var(--g); letter-spacing:.14em; text-transform:uppercase;
-  border-bottom:1px solid rgba(196,154,60,.2); padding-bottom:12px; margin-bottom:28px;
+  color:var(--m); letter-spacing:.14em; text-transform:uppercase;
+  border-bottom:1px solid rgba(60,15,26,.15); padding-bottom:12px; margin-bottom:28px;
 }
 
 /* ── Saree grid ── */
 .saree-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
 
 /* ── Saree card ── */
-.saree-card { background:var(--cr); display:flex; flex-direction:column; overflow:hidden; }
+.saree-card { background:#fff; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 2px 18px rgba(60,15,26,.08); }
 
 /* Image / carousel */
 .saree-img-wrap { position:relative; aspect-ratio:3/4; overflow:hidden; background:var(--m-dk); flex-shrink:0; }
