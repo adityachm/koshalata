@@ -22,16 +22,22 @@ export async function onRequest(context) {
 
   if (request.method === 'PUT') {
     const body = await request.json();
-    const { name, type, price, original_price, badge, image_url, wa_message, sort_order } = body;
-    if (!name || !type || !price || !image_url) {
+    const { name, type, price, original_price, badge, images, description, collection, wa_message, sort_order } = body;
+    if (!name || !type || !price || !images || !images.length) {
       return new Response('Missing required fields', { status: 400, headers: CORS });
     }
     await env.DB.prepare(
       `UPDATE sarees SET
-        name = ?, type = ?, price = ?, original_price = ?,
-        badge = ?, image_url = ?, wa_message = ?, sort_order = ?
-       WHERE id = ?`
-    ).bind(name, type, Number(price), original_price || null, badge || null, image_url, wa_message, sort_order || 0, id).run();
+        name=?, type=?, price=?, original_price=?, badge=?,
+        image_url=?, images=?, description=?, collection=?,
+        wa_message=?, sort_order=?
+       WHERE id=?`
+    ).bind(
+      name, type, Number(price), original_price || null, badge || null,
+      images[0], JSON.stringify(images),
+      description || '', collection || 'New Arrivals',
+      wa_message, sort_order || 0, id
+    ).run();
     return new Response(JSON.stringify({ ok: true }), {
       headers: { ...CORS, 'Content-Type': 'application/json' },
     });

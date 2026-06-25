@@ -1,6 +1,7 @@
 // ── State ──────────────────────────────────────────────────────────────────
-let SECRET = localStorage.getItem('kosh_admin_secret') || '';
+let SECRET = '';
 let sarees = [];
+let imageList = []; // array of uploaded image URLs for current form
 
 // ── Elements ───────────────────────────────────────────────────────────────
 const loginScreen   = document.getElementById('login-screen');
@@ -18,15 +19,12 @@ const formCancelBtn = document.getElementById('form-cancel-btn');
 const sareeForm     = document.getElementById('saree-form');
 const formErr       = document.getElementById('form-err');
 const formSubmitBtn = document.getElementById('form-submit-btn');
-
 const imgInput      = document.getElementById('img-input');
-const imgPreview    = document.getElementById('img-preview');
-const uploadArea    = document.getElementById('upload-area');
-const uploadPlaceholder = document.getElementById('upload-placeholder');
-const uploadProgress = document.getElementById('upload-progress');
+const addImgBtn     = document.getElementById('add-img-btn');
+const multiImgList  = document.getElementById('multi-img-list');
+const uploadStatusBar = document.getElementById('upload-status-bar');
 const uploadFill    = document.getElementById('upload-fill');
 const uploadStatus  = document.getElementById('upload-status');
-const imageUrlField = document.getElementById('image_url');
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 function api(path, opts = {}) {
@@ -41,25 +39,16 @@ function fmtPrice(price, orig) {
   return orig ? `<s>${f(orig)}</s> ${f(price)}` : f(price);
 }
 
-function showError(el, msg) {
-  el.textContent = msg;
-  el.hidden = false;
-}
+function showError(el, msg) { el.textContent = msg; el.hidden = false; }
 function clearError(el) { el.hidden = true; el.textContent = ''; }
 
 // ── Auth ───────────────────────────────────────────────────────────────────
 async function tryLogin(pw) {
-  // Validate password by hitting a protected endpoint
-  const res = await fetch('/api/sarees', {
-    headers: { 'X-Admin-Secret': pw },
-  });
-  // /api/sarees is public (GET), so we verify with a dummy POST
   const check = await fetch('/api/sarees', {
     method: 'POST',
     headers: { 'X-Admin-Secret': pw, 'Content-Type': 'application/json' },
     body: JSON.stringify({}),
   });
-  // 400 = bad body but auth passed; 401 = wrong password
   return check.status !== 401;
 }
 
@@ -68,20 +57,16 @@ loginForm.addEventListener('submit', async e => {
   clearError(loginErr);
   const pw = loginPw.value.trim();
   const btn = loginForm.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = 'Checking…';
+  btn.disabled = true; btn.textContent = 'Checking…';
   const ok = await tryLogin(pw);
-  btn.disabled = false;
-  btn.textContent = 'Sign In';
+  btn.disabled = false; btn.textContent = 'Sign In';
   if (!ok) { showError(loginErr, 'Incorrect password.'); return; }
   SECRET = pw;
-  localStorage.setItem('kosh_admin_secret', pw);
   showDashboard();
 });
 
 logoutBtn.addEventListener('click', () => {
   SECRET = '';
-  localStorage.removeItem('kosh_admin_secret');
   dashboard.hidden = true;
   loginScreen.hidden = false;
   loginPw.value = '';
@@ -97,82 +82,72 @@ function showDashboard() {
 async function loadSarees() {
   sareeList.innerHTML = '<p class="loading-msg">Loading…</p>';
   const res = await api('/api/sarees');
-  if (!res.ok) { sareeList.innerHTML = '<p class="loading-msg">Failed to load. Please refresh.</p>'; return; }
+  if (!res.ok) { sareeList.innerHTML = '<p class="loading-msg">Failed to load.</p>'; return; }
   sarees = await res.json();
   renderTable();
 }
 
 function renderTable() {
-  if (sarees.length === 0) {
+  if (!sarees.length) {
     sareeList.innerHTML = '<div class="empty-state"><p>No sarees yet. Click "+ Add Saree" to get started.</p></div>';
     return;
   }
   sareeList.innerHTML = `
     <table>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name &amp; Type</th>
-          <th>Price</th>
-          <th>Badge</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+      <thead><tr>
+        <th>Image</th><th>Name &amp; Collection</th><th>Price</th><th>Badge</th><th>Actions</th>
+      </tr></thead>
       <tbody>
-        ${sarees.map(s => `
-          <tr>
-            <td><img class="tbl-thumb" src="${s.image_url}" alt="${s.name}" onerror="this.style.opacity='.3'"/></td>
+        ${sarees.map(s => {
+          const imgs = s.imageList && s.imageList.length ? s.imageList : [s.image_url];
+          return `<tr>
+            <td><img class="tbl-thumb" src="${imgs[0]}" alt="${s.name}" onerror="this.style.opacity='.3'"/>
+              ${imgs.length > 1 ? `<span style="font-size:10px;color:var(--mu);display:block;text-align:center">+${imgs.length-1} more</span>` : ''}
+            </td>
             <td>
               <div class="tbl-name">${s.name}</div>
-              <div class="tbl-type">${s.type}</div>
+              <div class="tbl-type">${s.type} · ${s.collection || 'New Arrivals'}</div>
             </td>
             <td class="tbl-price">${fmtPrice(s.price, s.original_price)}</td>
             <td>${s.badge ? `<span class="badge-pill">${s.badge}</span>` : '—'}</td>
-            <td>
-              <div class="tbl-actions">
-                <button class="btn-edit" onclick="openEdit(${s.id})">Edit</button>
-                <button class="btn-delete" onclick="deleteSaree(${s.id}, '${s.name.replace(/'/g, "\\'")}')">Delete</button>
-              </div>
-            </td>
-          </tr>`).join('')}
+            <td><div class="tbl-actions">
+              <button class="btn-edit" onclick="openEdit(${s.id})">Edit</button>
+              <button class="btn-delete" onclick="deleteSaree(${s.id}, '${s.name.replace(/'/g,"\\'")}')">Delete</button>
+            </div></td>
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>`;
 }
 
-// ── Image Upload ────────────────────────────────────────────────────────────
-uploadArea.addEventListener('click', () => imgInput.click());
+// ── Multi-image list ────────────────────────────────────────────────────────
+function renderImageList() {
+  multiImgList.innerHTML = imageList.map((url, i) => `
+    <div class="img-thumb-wrap">
+      <img src="${url}" alt="Image ${i+1}"/>
+      ${i === 0 ? '<span class="img-main-tag">Main</span>' : ''}
+      <button type="button" class="img-rm" data-idx="${i}" aria-label="Remove">×</button>
+    </div>`).join('');
+  multiImgList.querySelectorAll('.img-rm').forEach(btn => {
+    btn.addEventListener('click', () => {
+      imageList.splice(Number(btn.dataset.idx), 1);
+      renderImageList();
+    });
+  });
+  addImgBtn.hidden = imageList.length >= 6;
+}
 
-uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
-uploadArea.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadArea.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file) handleImageFile(file);
-});
-
+addImgBtn.addEventListener('click', () => imgInput.click());
 imgInput.addEventListener('change', () => {
-  if (imgInput.files[0]) handleImageFile(imgInput.files[0]);
+  if (imgInput.files[0]) { handleImageFile(imgInput.files[0]); imgInput.value = ''; }
 });
 
 async function handleImageFile(file) {
   if (file.size > 5 * 1024 * 1024) { showError(formErr, 'Image must be under 5MB.'); return; }
   clearError(formErr);
-
-  // Show preview immediately
-  const reader = new FileReader();
-  reader.onload = ev => {
-    imgPreview.src = ev.target.result;
-    imgPreview.hidden = false;
-    uploadPlaceholder.hidden = true;
-  };
-  reader.readAsDataURL(file);
-
-  // Upload to R2
-  uploadProgress.hidden = false;
-  uploadFill.style.width = '30%';
+  addImgBtn.disabled = true; addImgBtn.textContent = 'Uploading…';
+  uploadStatusBar.hidden = false; uploadFill.style.width = '40%';
   uploadStatus.textContent = 'Uploading…';
-  formSubmitBtn.disabled = true;
 
   const fd = new FormData();
   fd.append('image', file);
@@ -184,34 +159,28 @@ async function handleImageFile(file) {
     });
     if (!res.ok) throw new Error(await res.text());
     const { url } = await res.json();
-    imageUrlField.value = url;
+    imageList.push(url);
+    renderImageList();
     uploadFill.style.width = '100%';
-    uploadStatus.textContent = 'Uploaded';
+    uploadStatus.textContent = 'Uploaded ✓';
+    setTimeout(() => { uploadStatusBar.hidden = true; uploadFill.style.width = '0%'; }, 1200);
   } catch (err) {
-    uploadStatus.textContent = 'Upload failed';
-    showError(formErr, 'Image upload failed: ' + err.message);
-    imageUrlField.value = '';
+    showError(formErr, 'Upload failed: ' + err.message);
+    uploadStatusBar.hidden = true;
   } finally {
-    formSubmitBtn.disabled = false;
+    addImgBtn.disabled = false;
+    addImgBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add Image`;
   }
 }
 
 // ── Modal ──────────────────────────────────────────────────────────────────
-function openModal() {
-  modalOverlay.hidden = false;
-  document.body.style.overflow = 'hidden';
-}
+function openModal() { modalOverlay.hidden = false; document.body.style.overflow = 'hidden'; }
 function closeModal() {
-  modalOverlay.hidden = true;
-  document.body.style.overflow = '';
-  sareeForm.reset();
-  clearError(formErr);
-  imageUrlField.value = '';
-  imgPreview.hidden = true;
-  uploadPlaceholder.hidden = false;
-  uploadProgress.hidden = true;
-  uploadFill.style.width = '0%';
-  imgInput.value = '';
+  modalOverlay.hidden = true; document.body.style.overflow = '';
+  sareeForm.reset(); clearError(formErr);
+  imageList = []; renderImageList();
+  uploadStatusBar.hidden = true; uploadFill.style.width = '0%';
+  imgInput.value = ''; addImgBtn.hidden = false;
 }
 
 addBtn.addEventListener('click', () => {
@@ -220,7 +189,6 @@ addBtn.addEventListener('click', () => {
   formSubmitBtn.textContent = 'Save Saree';
   openModal();
 });
-
 modalCloseBtn.addEventListener('click', closeModal);
 formCancelBtn.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
@@ -230,17 +198,16 @@ function openEdit(id) {
   if (!s) return;
   document.getElementById('edit-id').value = s.id;
   document.getElementById('name').value = s.name;
+  document.getElementById('collection').value = s.collection || 'New Arrivals';
   document.getElementById('type').value = s.type;
+  document.getElementById('badge').value = s.badge || '';
   document.getElementById('price').value = s.price;
   document.getElementById('original_price').value = s.original_price || '';
-  document.getElementById('badge').value = s.badge || '';
+  document.getElementById('description').value = s.description || '';
   document.getElementById('sort_order').value = s.sort_order || 0;
   document.getElementById('wa_message').value = s.wa_message || '';
-  imageUrlField.value = s.image_url;
-  imgPreview.src = s.image_url;
-  imgPreview.hidden = false;
-  uploadPlaceholder.hidden = true;
-  uploadProgress.hidden = true;
+  imageList = s.imageList && s.imageList.length ? [...s.imageList] : (s.image_url ? [s.image_url] : []);
+  renderImageList();
   modalTitle.textContent = 'Edit Saree';
   formSubmitBtn.textContent = 'Update Saree';
   openModal();
@@ -250,39 +217,30 @@ function openEdit(id) {
 sareeForm.addEventListener('submit', async e => {
   e.preventDefault();
   clearError(formErr);
-
-  const imageUrl = imageUrlField.value.trim();
-  if (!imageUrl) { showError(formErr, 'Please upload an image first.'); return; }
-
+  if (!imageList.length) { showError(formErr, 'Please add at least one image.'); return; }
+  const editId = document.getElementById('edit-id').value;
   const payload = {
     name:           document.getElementById('name').value.trim(),
+    collection:     document.getElementById('collection').value,
     type:           document.getElementById('type').value,
+    badge:          document.getElementById('badge').value || null,
     price:          Number(document.getElementById('price').value),
     original_price: document.getElementById('original_price').value ? Number(document.getElementById('original_price').value) : null,
-    badge:          document.getElementById('badge').value || null,
+    description:    document.getElementById('description').value.trim(),
     sort_order:     Number(document.getElementById('sort_order').value) || 0,
     wa_message:     document.getElementById('wa_message').value.trim() || null,
-    image_url:      imageUrl,
+    images:         imageList,
   };
-
-  const editId = document.getElementById('edit-id').value;
-  formSubmitBtn.disabled = true;
-  formSubmitBtn.textContent = 'Saving…';
-
+  formSubmitBtn.disabled = true; formSubmitBtn.textContent = 'Saving…';
   try {
     const res = await api(
       editId ? `/api/sarees/${editId}` : '/api/sarees',
-      {
-        method: editId ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }
+      { method: editId ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
     );
     if (!res.ok) throw new Error(await res.text());
-    closeModal();
-    await loadSarees();
+    closeModal(); await loadSarees();
   } catch (err) {
-    showError(formErr, 'Error saving saree: ' + err.message);
+    showError(formErr, 'Error saving: ' + err.message);
   } finally {
     formSubmitBtn.disabled = false;
     formSubmitBtn.textContent = editId ? 'Update Saree' : 'Save Saree';
@@ -291,17 +249,13 @@ sareeForm.addEventListener('submit', async e => {
 
 // ── Delete ─────────────────────────────────────────────────────────────────
 async function deleteSaree(id, name) {
-  if (!confirm(`Delete "${name}"? This will remove it from the website.`)) return;
+  if (!confirm(`Delete "${name}"?`)) return;
   const res = await api(`/api/sarees/${id}`, { method: 'DELETE' });
-  if (res.ok) {
-    await loadSarees();
-  } else {
-    alert('Failed to delete. Please try again.');
-  }
+  if (res.ok) await loadSarees();
+  else alert('Failed to delete.');
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
-SECRET = '';
-localStorage.removeItem('kosh_admin_secret');
 loginScreen.hidden = false;
 dashboard.hidden = true;
+renderImageList();
