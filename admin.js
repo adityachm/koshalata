@@ -301,16 +301,5 @@ async function deleteSaree(id, name) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
-async function init() {
-  if (SECRET) {
-    const ok = await tryLogin(SECRET);
-    if (ok) {
-      showDashboard();
-    } else {
-      SECRET = '';
-      localStorage.removeItem('kosh_admin_secret');
-    }
-  }
-}
-
-init();
+SECRET = '';
+localStorage.removeItem('kosh_admin_secret');
