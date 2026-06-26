@@ -1,0 +1,1 @@
+ALTER TABLE sarees ADD COLUMN is_sold_out INTEGER DEFAULT 0;

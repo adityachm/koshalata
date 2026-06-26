@@ -252,7 +252,7 @@ async function handleImageFile(file) {
 function openModal() { modalOverlay.hidden = false; document.body.style.overflow = 'hidden'; }
 function closeModal() {
   modalOverlay.hidden = true; document.body.style.overflow = '';
-  sareeForm.reset(); clearError(formErr);
+  sareeForm.reset(); document.getElementById('is_sold_out').checked = false; clearError(formErr);
   imageList = []; renderImageList();
   uploadStatusBar.hidden = true; uploadFill.style.width = '0%';
   imgInput.value = ''; addImgBtn.hidden = false;
@@ -281,6 +281,7 @@ function openEdit(id) {
   document.getElementById('description').value = s.description || '';
   document.getElementById('sort_order').value = s.sort_order || 0;
   document.getElementById('wa_message').value = s.wa_message || '';
+  document.getElementById('is_sold_out').checked = !!s.is_sold_out;
   imageList = s.imageList && s.imageList.length ? [...s.imageList] : (s.image_url ? [s.image_url] : []);
   renderImageList();
   modalTitle.textContent = 'Edit Saree';
@@ -305,6 +306,7 @@ sareeForm.addEventListener('submit', async e => {
     sort_order:     Number(document.getElementById('sort_order').value) || 0,
     wa_message:     document.getElementById('wa_message').value.trim() || null,
     images:         imageList,
+    is_sold_out:    document.getElementById('is_sold_out').checked,
   };
   formSubmitBtn.disabled = true; formSubmitBtn.textContent = 'Saving…';
   try {

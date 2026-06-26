@@ -364,6 +364,15 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 .c-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.35); cursor:pointer; border:none; padding:0; transition:background .2s; }
 .c-dot.active { background:#fff; }
 
+.sc-sold-out {
+  position:absolute; top:12px; left:0; z-index:3;
+  background:var(--m-dk); color:var(--cr);
+  font-family:'Cinzel',serif; font-size:8px; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase;
+  padding:5px 12px;
+  border-right:2px solid var(--g);
+}
+
 .sc-link { text-decoration:none; color:inherit; display:flex; flex-direction:column; flex:1; }
 .sc-link:hover .saree-img-wrap img { transform:scale(1.04); }
 .saree-img-wrap img { transition:transform .5s ease; }

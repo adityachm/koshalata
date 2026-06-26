@@ -37,19 +37,19 @@ export async function onRequest(context) {
       return new Response('Unauthorized', { status: 401, headers: CORS });
     }
     const body = await request.json();
-    const { name, type, price, original_price, badge, images, description, collection, wa_message, sort_order } = body;
+    const { name, type, price, original_price, badge, images, description, collection, wa_message, sort_order, is_sold_out } = body;
     if (!name || !type || !price || !images || !images.length) {
       return new Response('Missing required fields', { status: 400, headers: CORS });
     }
     const waText = wa_message || `Hello Koshalata, I'm interested in the ${name}.`;
     const { meta } = await env.DB.prepare(
-      `INSERT INTO sarees (name, type, price, original_price, badge, image_url, images, description, collection, wa_message, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO sarees (name, type, price, original_price, badge, image_url, images, description, collection, wa_message, sort_order, is_sold_out)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     ).bind(
       name, type, Number(price), original_price || null, badge || null,
       images[0], JSON.stringify(images),
       description || '', collection || 'New Arrivals',
-      waText, sort_order || 0
+      waText, sort_order || 0, is_sold_out ? 1 : 0
     ).run();
     return new Response(JSON.stringify({ id: meta.last_row_id }), {
       status: 201,

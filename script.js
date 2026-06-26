@@ -52,6 +52,7 @@ function buildCard(s) {
       <div class="saree-img-wrap">
         ${imgMarkup}
         ${carouselControls}
+        ${s.is_sold_out ? '<div class="sc-sold-out">Sold Out</div>' : ''}
       </div>
       <div class="saree-card-body">
         <div class="saree-card-top">

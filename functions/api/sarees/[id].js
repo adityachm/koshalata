@@ -45,7 +45,7 @@ export async function onRequest(context) {
 
   if (request.method === 'PUT') {
     const body = await request.json();
-    const { name, type, price, original_price, badge, images, description, collection, wa_message, sort_order } = body;
+    const { name, type, price, original_price, badge, images, description, collection, wa_message, sort_order, is_sold_out } = body;
     if (!name || !type || !price || !images || !images.length) {
       return new Response('Missing required fields', { status: 400, headers: CORS });
     }
@@ -60,13 +60,13 @@ export async function onRequest(context) {
       `UPDATE sarees SET
         name=?, type=?, price=?, original_price=?, badge=?,
         image_url=?, images=?, description=?, collection=?,
-        wa_message=?, sort_order=?
+        wa_message=?, sort_order=?, is_sold_out=?
        WHERE id=?`
     ).bind(
       name, type, Number(price), original_price || null, badge || null,
       images[0], JSON.stringify(images),
       description || '', collection || 'New Arrivals',
-      wa_message, sort_order || 0, id
+      wa_message, sort_order || 0, is_sold_out ? 1 : 0, id
     ).run();
 
     await deleteR2Images(env, removed);

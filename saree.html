@@ -219,6 +219,7 @@
         <div class="detail-imgs">
           <div class="detail-main-wrap">
             ${images.map((src, i) => `<img class="detail-main-img${i === 0 ? ' active' : ''}" src="${src}" alt="${s.name}" data-idx="${i}"/>`).join('')}
+            ${s.is_sold_out ? '<div class="sc-sold-out" style="position:absolute;top:16px;left:0;z-index:3;background:var(--m-dk);color:var(--cr);font-family:Cinzel,serif;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-right:2px solid var(--g)">Sold Out</div>' : ''}
           </div>
           ${images.length > 1 ? `<div class="detail-thumbs">${thumbsHtml}</div>` : ''}
         </div>
