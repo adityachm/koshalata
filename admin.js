@@ -332,6 +332,29 @@ async function deleteSaree(id, name) {
   else alert('Failed to delete.');
 }
 
+// ── Storage cleanup ────────────────────────────────────────────────────────
+document.getElementById('cleanup-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('cleanup-btn');
+  const result = document.getElementById('cleanup-result');
+  const err = document.getElementById('cleanup-err');
+  result.hidden = true; err.hidden = true;
+  btn.disabled = true; btn.textContent = 'Cleaning…';
+
+  try {
+    const res = await api('/api/cleanup', { method: 'POST' });
+    if (!res.ok) throw new Error(await res.text());
+    const { deleted, keys } = await res.json();
+    result.hidden = false;
+    result.textContent = deleted === 0
+      ? 'No orphaned images found — storage is clean.'
+      : `Deleted ${deleted} orphaned file${deleted > 1 ? 's' : ''}: ${keys.join(', ')}`;
+  } catch (e) {
+    showError(err, 'Cleanup failed: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Clean Up Storage';
+  }
+});
+
 // ── Init ───────────────────────────────────────────────────────────────────
 loginScreen.hidden = false;
 dashboard.hidden = true;
