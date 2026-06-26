@@ -1,6 +1,6 @@
 const CORS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Secret',
 };
 
@@ -27,6 +27,16 @@ export async function onRequest(context) {
 
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: CORS });
+  }
+
+  if (request.method === 'GET') {
+    const saree = await env.DB.prepare('SELECT * FROM sarees WHERE id = ? AND is_active = 1').bind(id).first();
+    if (!saree) return new Response('Not found', { status: 404, headers: CORS });
+    const imgs = parseImgs(saree.images);
+    if (saree.image_url && !imgs.includes(saree.image_url)) imgs.unshift(saree.image_url);
+    return new Response(JSON.stringify({ ...saree, imageList: imgs }), {
+      headers: { ...CORS, 'Content-Type': 'application/json' },
+    });
   }
 
   if (!isAdmin(request, env)) {

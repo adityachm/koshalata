@@ -48,20 +48,21 @@ function buildCard(s) {
   const card = document.createElement('div');
   card.className = 'saree-card rv';
   card.innerHTML = `
-    <div class="saree-img-wrap">
-      ${imgMarkup}
-      ${carouselControls}
-    </div>
-    <div class="saree-card-body">
-      <div class="saree-card-top">
-        ${s.badge ? `<span class="sc-badge">${s.badge}</span>` : '<span></span>'}
-        <span class="sc-type">${s.type}</span>
+    <a class="sc-link" href="/saree.html?id=${s.id}" aria-label="View ${s.name}">
+      <div class="saree-img-wrap">
+        ${imgMarkup}
+        ${carouselControls}
       </div>
-      <h3 class="sc-name">${s.name}</h3>
-      <p class="sc-price">${formatPrice(s.price, s.original_price)}</p>
-      ${s.description ? `<p class="sc-desc">${s.description}</p>` : ''}
-      <a class="sc-wa" href="${waLink}" target="_blank" rel="noopener">${WA_SVG} Enquire on WhatsApp</a>
-    </div>`;
+      <div class="saree-card-body">
+        <div class="saree-card-top">
+          ${s.badge ? `<span class="sc-badge">${s.badge}</span>` : '<span></span>'}
+          <span class="sc-type">${s.type}</span>
+        </div>
+        <h3 class="sc-name">${s.name}</h3>
+        <p class="sc-price">${formatPrice(s.price, s.original_price)}</p>
+      </div>
+    </a>
+    <a class="sc-wa" href="${waLink}" target="_blank" rel="noopener">${WA_SVG} Enquire on WhatsApp</a>`;
 
   if (images.length > 1) {
     let cur = 0;

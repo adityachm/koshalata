@@ -192,6 +192,25 @@ button.btn-primary { width: auto; }
 
 .adm-header-right { display: flex; align-items: center; gap: .75rem; }
 
+.adm-header .btn-outline {
+  color: var(--g-l);
+  border-color: rgba(196,154,60,.5);
+  background: transparent;
+}
+.adm-header .btn-outline:hover {
+  background: rgba(196,154,60,.12);
+  border-color: var(--g-l);
+}
+.adm-header .btn-ghost {
+  color: var(--cr);
+  opacity: .85;
+}
+.adm-header .btn-ghost:hover {
+  background: rgba(245,237,223,.1);
+  color: #fff;
+  opacity: 1;
+}
+
 /* ── MAIN ── */
 .adm-main {
   max-width: 960px;

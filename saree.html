@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Koshalata</title>
+  <meta name="description" content="Koshalata — Handcrafted sarees of rare artistry."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; }
+
+    .detail-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: rgba(245,237,223,.6); font-size: 11px; letter-spacing: .12em;
+      text-transform: uppercase; font-family: 'Cinzel', serif;
+      text-decoration: none; padding: 28px 60px 0;
+      transition: color .2s;
+    }
+    .detail-back:hover { color: var(--g-l); }
+    .detail-back svg { transition: transform .2s; }
+    .detail-back:hover svg { transform: translateX(-3px); }
+
+    .detail-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 0 60px 80px;
+    }
+
+    /* ── Image panel ── */
+    .detail-imgs { position: sticky; top: 90px; align-self: start; padding-right: 48px; }
+
+    .detail-main-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--m);
+    }
+    .detail-main-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0; transition: opacity .45s;
+    }
+    .detail-main-img.active { opacity: 1; }
+
+    .detail-thumbs {
+      display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .detail-thumb {
+      width: 64px; height: 80px; object-fit: cover;
+      border: 2px solid transparent; cursor: pointer;
+      transition: border-color .2s; opacity: .65; transition: opacity .2s, border-color .2s;
+    }
+    .detail-thumb.active { border-color: var(--g); opacity: 1; }
+    .detail-thumb:hover { opacity: 1; }
+
+    /* ── Info panel ── */
+    .detail-info { padding-left: 48px; border-left: 1px solid rgba(196,154,60,.15); }
+
+    .detail-collection {
+      font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--g); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .detail-collection::before { content:''; width:28px; height:1px; background:var(--g); opacity:.6; }
+
+    .detail-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; color: var(--cr);
+      line-height: 1.1; margin-bottom: 12px;
+    }
+
+    .detail-meta {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .detail-badge {
+      background: var(--g); color: var(--m-dk);
+      font-size: 9px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; padding: 3px 10px;
+    }
+    .detail-type {
+      font-size: 11px; color: rgba(245,237,223,.55);
+      letter-spacing: .1em; text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+    }
+
+    .detail-rule { width: 100%; height: 1px; background: rgba(196,154,60,.18); margin-bottom: 28px; }
+
+    .detail-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 500; color: var(--g-l);
+      margin-bottom: 4px; line-height: 1;
+    }
+    .detail-price s { font-size: 1.2rem; color: rgba(245,237,223,.35); font-weight: 300; margin-right: 8px; }
+    .detail-price-note { font-size: 11px; color: rgba(245,237,223,.4); letter-spacing: .06em; margin-bottom: 32px; }
+
+    .detail-desc-label {
+      font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(245,237,223,.45); margin-bottom: 10px;
+    }
+    .detail-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; color: rgba(245,237,223,.8);
+      line-height: 1.9; margin-bottom: 40px; font-weight: 300;
+    }
+    .detail-desc-empty { display: none; }
+
+    .detail-wa {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--g); color: var(--m);
+      text-decoration: none; padding: 16px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; transition: background .25s, transform .2s;
+      margin-bottom: 14px;
+    }
+    .detail-wa:hover { background: var(--g-l); transform: translateY(-2px); }
+
+    .detail-call {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid rgba(196,154,60,.3); color: var(--g-l);
+      text-decoration: none; padding: 13px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; transition: border-color .2s, background .2s;
+    }
+    .detail-call:hover { border-color: var(--g); background: rgba(196,154,60,.06); }
+
+    .detail-loading {
+      grid-column: 1/-1; text-align: center;
+      padding: 6rem; color: rgba(245,237,223,.4);
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: .2em;
+    }
+    .detail-error {
+      grid-column: 1/-1; text-align: center;
+      padding: 6rem; color: rgba(245,237,223,.5);
+      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+    }
+
+    @media (max-width: 820px) {
+      .detail-back { padding: 20px 24px 0; }
+      .detail-wrap { grid-template-columns: 1fr; padding: 0 24px 60px; }
+      .detail-imgs { position: static; padding-right: 0; }
+      .detail-info { padding-left: 0; border-left: none; border-top: 1px solid rgba(196,154,60,.15); padding-top: 36px; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <img src="logo.png" alt="Koshalata" class="nav-k" onclick="window.location='/'"/>
+  <ul class="nav-links">
+    <li><a href="/#story">Story</a></li>
+    <li><a href="/#sarees">Collection</a></li>
+    <li><a href="/#craft">Craft</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <a class="btn-wa" href="https://wa.me/917668174494?text=Hello%20Koshalata%2C%20I%27m%20interested%20in%20your%20saree%20collection." target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a class="btn-ring" href="tel:+917668174494">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      Call
+    </a>
+  </div>
+  <div class="hbg" onclick="this.closest('nav').classList.toggle('mob')"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="detail-page">
+  <a class="detail-back" href="/#sarees">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to Collection
+  </a>
+
+  <div class="detail-wrap" id="detail-wrap">
+    <div class="detail-loading">Loading…</div>
+  </div>
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('up', window.scrollY > 60));
+
+  const WA_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+  function formatPrice(price, orig) {
+    const f = n => '₹' + Number(n).toLocaleString('en-IN');
+    return orig ? `<s>${f(orig)}</s> ${f(price)}` : f(price);
+  }
+
+  async function loadSaree() {
+    const wrap = document.getElementById('detail-wrap');
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (!id) { wrap.innerHTML = '<div class="detail-error">Saree not found.</div>'; return; }
+
+    try {
+      const res = await fetch(`/api/sarees/${id}`);
+      if (!res.ok) throw new Error();
+      const s = await res.json();
+
+      document.title = `${s.name} — Koshalata`;
+      const images = s.imageList && s.imageList.length ? s.imageList : [s.image_url];
+      const waLink = `https://wa.me/917668174494?text=${encodeURIComponent(s.wa_message || `Hello Koshalata, I'm interested in the ${s.name}.`)}`;
+
+      const thumbsHtml = images.length > 1
+        ? images.map((src, i) => `<img class="detail-thumb${i === 0 ? ' active' : ''}" src="${src}" alt="${s.name} view ${i+1}" data-idx="${i}" loading="lazy"/>`).join('')
+        : '';
+
+      wrap.innerHTML = `
+        <div class="detail-imgs">
+          <div class="detail-main-wrap">
+            ${images.map((src, i) => `<img class="detail-main-img${i === 0 ? ' active' : ''}" src="${src}" alt="${s.name}" data-idx="${i}"/>`).join('')}
+          </div>
+          ${images.length > 1 ? `<div class="detail-thumbs">${thumbsHtml}</div>` : ''}
+        </div>
+
+        <div class="detail-info">
+          <p class="detail-collection">${s.collection || 'New Arrivals'}</p>
+          <h1 class="detail-name">${s.name}</h1>
+          <div class="detail-meta">
+            ${s.badge ? `<span class="detail-badge">${s.badge}</span>` : ''}
+            <span class="detail-type">${s.type}</span>
+          </div>
+          <div class="detail-rule"></div>
+          <p class="detail-price">${formatPrice(s.price, s.original_price)}</p>
+          <p class="detail-price-note">Inclusive of all taxes · Blouse stitching available</p>
+          ${s.description ? `
+            <p class="detail-desc-label">About this Saree</p>
+            <p class="detail-desc">${s.description}</p>
+          ` : ''}
+          <a class="detail-wa" href="${waLink}" target="_blank" rel="noopener">${WA_SVG} Enquire on WhatsApp</a>
+          <a class="detail-call" href="tel:+917668174494">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            Call Us · +91 76681 74494
+          </a>
+        </div>`;
+
+      // Thumbnail click → switch main image
+      let cur = 0;
+      const mainImgs = wrap.querySelectorAll('.detail-main-img');
+      const thumbs = wrap.querySelectorAll('.detail-thumb');
+
+      function goTo(idx) {
+        mainImgs[cur].classList.remove('active');
+        if (thumbs[cur]) thumbs[cur].classList.remove('active');
+        cur = idx;
+        mainImgs[cur].classList.add('active');
+        if (thumbs[cur]) thumbs[cur].classList.add('active');
+      }
+
+      thumbs.forEach(t => t.addEventListener('click', () => goTo(Number(t.dataset.idx))));
+
+    } catch {
+      wrap.innerHTML = '<div class="detail-error">Could not load saree details. Please go back and try again.</div>';
+    }
+  }
+
+  loadSaree();
+</script>
+</body>
+</html>

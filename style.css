@@ -364,8 +364,12 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 .c-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.35); cursor:pointer; border:none; padding:0; transition:background .2s; }
 .c-dot.active { background:#fff; }
 
+.sc-link { text-decoration:none; color:inherit; display:flex; flex-direction:column; flex:1; }
+.sc-link:hover .saree-img-wrap img { transform:scale(1.04); }
+.saree-img-wrap img { transition:transform .5s ease; }
+
 /* Card body */
-.saree-card-body { padding:14px 16px 16px; display:flex; flex-direction:column; flex:1; }
+.saree-card-body { padding:14px 16px 16px; display:flex; flex-direction:column; }
 .saree-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:7px; min-height:18px; }
 .sc-badge {
   background:var(--g); color:var(--m-dk);
