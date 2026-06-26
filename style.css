@@ -132,15 +132,12 @@ nav.up { height: 62px; box-shadow: 0 6px 40px rgba(0,0,0,.55); }
 }
 
 .hero-brand {
-  font-family: 'Cinzel', serif;
-  font-size: 22px; letter-spacing: 12px; text-transform: uppercase;
-  color: #E8C96A; font-weight: 900; margin-bottom: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; letter-spacing: 18px; text-transform: uppercase;
+  color: #E8C96A; font-weight: 300; font-style: italic; margin-bottom: 22px;
   text-shadow:
-    2px  2px 0 #1E0710,
-   -2px -2px 0 #1E0710,
-    2px -2px 0 #1E0710,
-   -2px  2px 0 #1E0710,
-    0    3px 10px rgba(30,7,16,.85);
+    0 2px 12px rgba(30,7,16,.95),
+    0 0 40px rgba(30,7,16,.7);
   animation: fadeUp .9s .25s ease both;
 }
 
