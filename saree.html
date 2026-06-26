@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; }
+    .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; overflow-x: hidden; }
 
     .detail-back {
       display: inline-flex; align-items: center; gap: 8px;
@@ -175,6 +175,8 @@
       .detail-wrap { grid-template-columns: 1fr; padding: 0 24px 60px; }
       .detail-imgs { position: static; padding-right: 0; max-height: none; height: auto; }
       .detail-main-wrap { height: 70vw; max-height: 420px; flex: none; }
+      .detail-thumbs { flex-wrap: wrap; overflow-x: visible; }
+      .detail-thumb { width: 52px; height: 64px; }
       .detail-info { padding-left: 0; border-left: none; border-top: 1px solid rgba(196,154,60,.15); padding-top: 36px; margin-top: 8px; }
     }
   </style>
