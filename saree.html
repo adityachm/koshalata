@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/png" href="logo.png"/>
   <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; }
 
@@ -106,10 +107,27 @@
     }
     .detail-desc {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem; color: rgba(245,237,223,.8);
+      font-size: 1.1rem; color: rgba(245,237,223,.82);
       line-height: 1.9; margin-bottom: 40px; font-weight: 300;
     }
-    .detail-desc + .detail-desc { margin-top: -24px; }
+    .detail-desc p { margin-bottom: 14px; }
+    .detail-desc h1, .detail-desc h2, .detail-desc h3 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--g-l); font-weight: 500; letter-spacing: .04em;
+      margin: 28px 0 10px;
+    }
+    .detail-desc h1 { font-size: 1.6rem; }
+    .detail-desc h2 { font-size: 1.35rem; border-bottom: 1px solid rgba(196,154,60,.2); padding-bottom: 6px; }
+    .detail-desc h3 { font-size: 1.15rem; }
+    .detail-desc strong { color: var(--cr); font-weight: 600; }
+    .detail-desc em { color: rgba(245,237,223,.7); font-style: italic; }
+    .detail-desc ul, .detail-desc ol {
+      padding-left: 20px; margin-bottom: 14px;
+    }
+    .detail-desc li { margin-bottom: 6px; }
+    .detail-desc ul li { list-style: none; padding-left: 4px; }
+    .detail-desc ul li::before { content: '·'; color: var(--g); margin-right: 8px; font-weight: 700; }
+    .detail-desc hr { border: none; border-top: 1px solid rgba(196,154,60,.15); margin: 20px 0; }
     .detail-desc-empty { display: none; }
 
     .detail-wa {
@@ -237,7 +255,7 @@
           <p class="detail-price-note">Inclusive of all taxes · Blouse stitching available</p>
           ${s.description ? `
             <p class="detail-desc-label">About this Saree</p>
-            <p class="detail-desc">${s.description.replace(/\n\n/g, '</p><p class="detail-desc">').replace(/\n/g, '<br/>')}</p>
+            <div class="detail-desc">${marked.parse(s.description)}</div>
           ` : ''}
           <a class="detail-wa" href="${waLink}" target="_blank" rel="noopener">${WA_SVG} Enquire on WhatsApp</a>
           <a class="detail-call" href="tel:+917668174494">
