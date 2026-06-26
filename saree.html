@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; overflow-x: hidden; }
+    .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; }
+    * { box-sizing: border-box; }
+    body { overflow-x: hidden; }
 
     .detail-back {
       display: inline-flex; align-items: center; gap: 8px;
@@ -117,6 +119,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem; color: rgba(245,237,223,.82);
       line-height: 1.9; margin-bottom: 40px; font-weight: 300;
+      max-width: 100%; overflow-wrap: break-word; word-break: break-word;
     }
     .detail-desc p { margin-bottom: 14px; }
     .detail-desc h1, .detail-desc h2, .detail-desc h3 {
