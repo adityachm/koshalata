@@ -35,27 +35,35 @@
     }
 
     /* ── Image panel ── */
-    .detail-imgs { position: sticky; top: 90px; align-self: start; padding-right: 48px; }
+    .detail-imgs {
+      position: sticky; top: 90px; align-self: start; padding-right: 48px;
+      display: flex; flex-direction: column;
+      max-height: calc(100vh - 110px);
+    }
 
     .detail-main-wrap {
       position: relative;
-      aspect-ratio: 3/4;
+      flex: 1; min-height: 0;
       overflow: hidden;
       background: var(--m);
     }
     .detail-main-img {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0; transition: opacity .45s;
+      object-fit: contain; opacity: 0; transition: opacity .45s;
     }
     .detail-main-img.active { opacity: 1; }
 
     .detail-thumbs {
-      display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;
+      display: flex; gap: 8px; margin-top: 10px;
+      flex-shrink: 0; flex-wrap: nowrap; overflow-x: auto;
+      padding-bottom: 2px;
     }
+    .detail-thumbs::-webkit-scrollbar { height: 3px; }
+    .detail-thumbs::-webkit-scrollbar-thumb { background: rgba(196,154,60,.35); }
     .detail-thumb {
-      width: 64px; height: 80px; object-fit: cover;
+      width: 56px; height: 70px; object-fit: cover; flex-shrink: 0;
       border: 2px solid transparent; cursor: pointer;
-      transition: border-color .2s; opacity: .65; transition: opacity .2s, border-color .2s;
+      opacity: .6; transition: opacity .2s, border-color .2s;
     }
     .detail-thumb.active { border-color: var(--g); opacity: 1; }
     .detail-thumb:hover { opacity: 1; }
@@ -165,7 +173,8 @@
     @media (max-width: 820px) {
       .detail-back { padding: 20px 24px 0; }
       .detail-wrap { grid-template-columns: 1fr; padding: 0 24px 60px; }
-      .detail-imgs { position: static; padding-right: 0; }
+      .detail-imgs { position: static; padding-right: 0; max-height: none; height: auto; }
+      .detail-main-wrap { height: 70vw; max-height: 420px; flex: none; }
       .detail-info { padding-left: 0; border-left: none; border-top: 1px solid rgba(196,154,60,.15); padding-top: 36px; margin-top: 8px; }
     }
   </style>
