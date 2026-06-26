@@ -109,6 +109,7 @@
       font-size: 1.15rem; color: rgba(245,237,223,.8);
       line-height: 1.9; margin-bottom: 40px; font-weight: 300;
     }
+    .detail-desc + .detail-desc { margin-top: -24px; }
     .detail-desc-empty { display: none; }
 
     .detail-wa {
@@ -236,7 +237,7 @@
           <p class="detail-price-note">Inclusive of all taxes · Blouse stitching available</p>
           ${s.description ? `
             <p class="detail-desc-label">About this Saree</p>
-            <p class="detail-desc">${s.description}</p>
+            <p class="detail-desc">${s.description.replace(/\n\n/g, '</p><p class="detail-desc">').replace(/\n/g, '<br/>')}</p>
           ` : ''}
           <a class="detail-wa" href="${waLink}" target="_blank" rel="noopener">${WA_SVG} Enquire on WhatsApp</a>
           <a class="detail-call" href="tel:+917668174494">
