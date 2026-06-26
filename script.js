@@ -59,6 +59,7 @@ function buildCard(s) {
           <span class="sc-type">${s.type}</span>
         </div>
         <h3 class="sc-name">${s.name}</h3>
+        <p class="sc-collection">${s.collection || 'New Arrivals'}</p>
         <p class="sc-price">${formatPrice(s.price, s.original_price)}</p>
       </div>
     </a>
@@ -94,32 +95,14 @@ async function loadSarees() {
       return;
     }
 
-    // Group by collection, preserving order
-    const order = [];
-    const groups = {};
+    const grid = document.createElement('div');
+    grid.className = 'saree-grid';
     sarees.forEach(s => {
-      const col = s.collection || 'New Arrivals';
-      if (!groups[col]) { groups[col] = []; order.push(col); }
-      groups[col].push(s);
+      const card = buildCard(s);
+      grid.appendChild(card);
+      observe(card);
     });
-
-    order.forEach(colName => {
-      const section = document.createElement('div');
-      section.className = 'collection-group rv';
-
-      const grid = document.createElement('div');
-      grid.className = 'saree-grid';
-      groups[colName].forEach(s => {
-        const card = buildCard(s);
-        grid.appendChild(card);
-        observe(card);
-      });
-
-      section.innerHTML = `<p class="collection-group-title">${colName}</p>`;
-      section.appendChild(grid);
-      container.appendChild(section);
-      observe(section);
-    });
+    container.appendChild(grid);
 
   } catch {
     container.innerHTML = '<p style="color:var(--mu);text-align:center;padding:2rem;opacity:.6">Could not load sarees. Please refresh.</p>';
