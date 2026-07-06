@@ -77,10 +77,31 @@
         <span id="story-img-status">Uploading…</span>
       </div>
       <div id="story-img-err" class="err-msg" hidden></div>
-      <div style="margin-top:20px;">
-        <label class="form-label" for="story-text-input">Story Text</label>
-        <textarea id="story-text-input" class="form-input" rows="5" placeholder="Enter the story paragraph shown on the homepage…" style="resize:vertical;"></textarea>
-        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;">
+      <div style="margin-top:24px;">
+        <label class="form-label">Story Text</label>
+        <div class="rte-toolbar">
+          <button type="button" class="rte-btn" data-cmd="bold" title="Bold"><b>B</b></button>
+          <button type="button" class="rte-btn" data-cmd="italic" title="Italic"><i>I</i></button>
+          <button type="button" class="rte-btn" data-cmd="underline" title="Underline"><u>U</u></button>
+          <span class="rte-sep"></span>
+          <select class="rte-select" id="rte-font-size" title="Font size">
+            <option value="">Size</option>
+            <option value="1">Small</option>
+            <option value="3">Normal</option>
+            <option value="4">Large</option>
+            <option value="5">X-Large</option>
+          </select>
+          <span class="rte-sep"></span>
+          <label class="rte-color-wrap" title="Text colour">
+            <span>A</span>
+            <input type="color" id="rte-color" value="#F5EDDF"/>
+          </label>
+          <span class="rte-sep"></span>
+          <button type="button" class="rte-btn" data-cmd="removeFormat" title="Clear formatting">✕ Clear</button>
+        </div>
+        <div id="story-editor" class="rte-editor" contenteditable="true" spellcheck="true"
+          data-placeholder="Enter the story paragraph shown on the homepage…"></div>
+        <div style="margin-top:12px;display:flex;gap:10px;align-items:center;">
           <button class="btn-primary" id="story-text-save-btn">Save Text</button>
           <span id="story-text-result" style="font-size:13px;color:var(--g-l);"></span>
         </div>

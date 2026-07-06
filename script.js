@@ -119,6 +119,6 @@ loadSarees();
     const s = await res.json();
     if (s.hero_image) document.querySelector('.hero-bg').style.backgroundImage = `url('${s.hero_image}')`;
     if (s.story_image) document.getElementById('story-img').src = s.story_image;
-    if (s.story_text) document.getElementById('story-body').innerHTML = s.story_text.replace(/\n/g, '<br/>');
+    if (s.story_text) document.getElementById('story-body').innerHTML = s.story_text;
   } catch {}
 })();

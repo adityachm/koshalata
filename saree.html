@@ -12,6 +12,28 @@
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.95);
+      display: flex; align-items: center; justify-content: center;
+      animation: lbIn .2s ease;
+    }
+    @keyframes lbIn { from { opacity:0 } to { opacity:1 } }
+    #lb-close {
+      position: fixed; top: 20px; right: 24px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s; z-index: 10000;
+    }
+    #lb-close:hover { background: rgba(255,255,255,.25); }
+    #lb-img {
+      max-width: 92vw; max-height: 92vh;
+      object-fit: contain;
+      box-shadow: 0 8px 60px rgba(0,0,0,.6);
+    }
+
     .detail-page { min-height: 100vh; background: var(--m-dk); padding-top: 0; }
     * { box-sizing: border-box; }
     body { overflow-x: hidden; }
@@ -208,6 +230,14 @@
   <div class="hbg" onclick="this.closest('nav').classList.toggle('mob')"><span></span><span></span><span></span></div>
 </nav>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" hidden>
+  <button id="lb-close" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
 <div class="detail-page">
   <a class="detail-back" href="/#sarees">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -293,10 +323,31 @@
 
       thumbs.forEach(t => t.addEventListener('click', () => goTo(Number(t.dataset.idx))));
 
+      // Lightbox — click main image to zoom
+      const mainWrap = wrap.querySelector('.detail-main-wrap');
+      mainWrap.style.cursor = 'zoom-in';
+      mainWrap.addEventListener('click', () => {
+        const activeSrc = wrap.querySelector('.detail-main-img.active').src;
+        document.getElementById('lb-img').src = activeSrc;
+        document.getElementById('lightbox').hidden = false;
+        document.body.style.overflow = 'hidden';
+      });
+
     } catch {
       wrap.innerHTML = '<div class="detail-error">Could not load saree details. Please go back and try again.</div>';
     }
   }
+
+  // Lightbox close
+  function closeLightbox() {
+    document.getElementById('lightbox').hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   loadSaree();
 </script>

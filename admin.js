@@ -166,7 +166,7 @@ async function loadStorySettings() {
       document.getElementById('story-img-empty').hidden = true;
     }
     if (s.story_text) {
-      document.getElementById('story-text-input').value = s.story_text;
+      document.getElementById('story-editor').innerHTML = s.story_text;
     }
   } catch {}
 }
@@ -212,15 +212,32 @@ async function uploadStorySetting(file) {
   }
 }
 
+// Rich text editor toolbar
+document.querySelectorAll('.rte-btn[data-cmd]').forEach(btn => {
+  btn.addEventListener('mousedown', e => {
+    e.preventDefault();
+    document.execCommand(btn.dataset.cmd, false, null);
+    document.getElementById('story-editor').focus();
+  });
+});
+document.getElementById('rte-font-size').addEventListener('change', function() {
+  if (this.value) { document.execCommand('fontSize', false, this.value); this.value = ''; }
+  document.getElementById('story-editor').focus();
+});
+document.getElementById('rte-color').addEventListener('input', function() {
+  document.execCommand('foreColor', false, this.value);
+  document.getElementById('story-editor').focus();
+});
+
 document.getElementById('story-text-save-btn').addEventListener('click', async () => {
   const btn = document.getElementById('story-text-save-btn');
   const result = document.getElementById('story-text-result');
   const err = document.getElementById('story-text-err');
-  const text = document.getElementById('story-text-input').value.trim();
+  const html = document.getElementById('story-editor').innerHTML.trim();
   clearError(err); result.textContent = '';
   btn.disabled = true; btn.textContent = 'Saving…';
   try {
-    const res = await api('/api/settings', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'story_text', value: text }) });
+    const res = await api('/api/settings', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'story_text', value: html }) });
     if (!res.ok) throw new Error(await res.text());
     result.textContent = 'Saved ✓';
     setTimeout(() => { result.textContent = ''; }, 2000);
