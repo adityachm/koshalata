@@ -59,6 +59,35 @@
       <div id="cover-err" class="err-msg" hidden></div>
     </div>
 
+    <div class="settings-card">
+      <div class="settings-card-hd">
+        <div>
+          <h2 class="settings-title">Story Section</h2>
+          <p class="settings-sub">Image and text shown in the Our Story section on the homepage</p>
+        </div>
+        <button class="btn-outline" id="story-img-btn">Upload Image</button>
+        <input type="file" id="story-img-input" accept="image/jpeg,image/png,image/webp" hidden/>
+      </div>
+      <div id="story-img-preview-wrap" class="cover-preview-wrap">
+        <div class="cover-preview-empty" id="story-img-empty">No custom story image — showing default</div>
+        <img id="story-img-preview" hidden/>
+      </div>
+      <div id="story-img-status-bar" class="upload-status-bar" hidden>
+        <div class="upload-bar"><div class="upload-fill" id="story-img-fill"></div></div>
+        <span id="story-img-status">Uploading…</span>
+      </div>
+      <div id="story-img-err" class="err-msg" hidden></div>
+      <div style="margin-top:20px;">
+        <label class="form-label" for="story-text-input">Story Text</label>
+        <textarea id="story-text-input" class="form-input" rows="5" placeholder="Enter the story paragraph shown on the homepage…" style="resize:vertical;"></textarea>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;">
+          <button class="btn-primary" id="story-text-save-btn">Save Text</button>
+          <span id="story-text-result" style="font-size:13px;color:var(--g-l);"></span>
+        </div>
+        <div id="story-text-err" class="err-msg" hidden></div>
+      </div>
+    </div>
+
     <div class="adm-top">
       <h1>Saree Listings</h1>
       <button class="btn-primary" id="add-btn">+ Add Saree</button>

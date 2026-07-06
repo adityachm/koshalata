@@ -29,8 +29,8 @@ export async function onRequest(context) {
     const { key, value } = await request.json();
     if (!key || value === undefined) return new Response('Bad request', { status: 400, headers: CORS });
 
-    // If replacing hero_image, delete the old file from R2
-    if (key === 'hero_image') {
+    // If replacing an image setting, delete the old file from R2
+    if (key === 'hero_image' || key === 'story_image') {
       const old = await env.DB.prepare('SELECT value FROM settings WHERE key = ?').bind(key).first();
       if (old?.value && old.value.startsWith(env.R2_PUBLIC_URL + '/')) {
         const oldKey = old.value.slice(env.R2_PUBLIC_URL.length + 1);

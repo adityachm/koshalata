@@ -87,6 +87,7 @@ function showDashboard() {
   dashboard.hidden = false;
   loadSarees();
   loadCoverPhoto();
+  loadStorySettings();
 }
 
 // ── Cover photo ────────────────────────────────────────────────────────────────
@@ -152,6 +153,83 @@ async function uploadCoverPhoto(file) {
     coverUploadBtn.disabled = false; coverUploadBtn.textContent = 'Upload New Photo';
   }
 }
+
+// ── Story section ──────────────────────────────────────────────────────────
+async function loadStorySettings() {
+  try {
+    const res = await fetch('/api/settings');
+    if (!res.ok) return;
+    const s = await res.json();
+    if (s.story_image) {
+      document.getElementById('story-img-preview').src = s.story_image;
+      document.getElementById('story-img-preview').hidden = false;
+      document.getElementById('story-img-empty').hidden = true;
+    }
+    if (s.story_text) {
+      document.getElementById('story-text-input').value = s.story_text;
+    }
+  } catch {}
+}
+
+document.getElementById('story-img-btn').addEventListener('click', () =>
+  document.getElementById('story-img-input').click()
+);
+document.getElementById('story-img-input').addEventListener('change', () => {
+  const file = document.getElementById('story-img-input').files[0];
+  if (file) { uploadStorySetting(file); document.getElementById('story-img-input').value = ''; }
+});
+
+async function uploadStorySetting(file) {
+  if (file.size > 10 * 1024 * 1024) { showError(document.getElementById('story-img-err'), 'Image must be under 10MB.'); return; }
+  clearError(document.getElementById('story-img-err'));
+  const btn = document.getElementById('story-img-btn');
+  const bar = document.getElementById('story-img-status-bar');
+  const fill = document.getElementById('story-img-fill');
+  const status = document.getElementById('story-img-status');
+  btn.disabled = true; btn.textContent = 'Uploading…';
+  bar.hidden = false; fill.style.width = '40%'; status.textContent = 'Uploading…';
+
+  try {
+    const fd = new FormData();
+    fd.append('image', file);
+    fd.append('prefix', 'story');
+    const upRes = await fetch('/api/upload', { method: 'POST', headers: { 'X-Admin-Secret': SECRET }, body: fd });
+    if (!upRes.ok) throw new Error(await upRes.text());
+    const { url } = await upRes.json();
+    fill.style.width = '70%'; status.textContent = 'Saving…';
+    const saveRes = await api('/api/settings', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'story_image', value: url }) });
+    if (!saveRes.ok) throw new Error(await saveRes.text());
+    fill.style.width = '100%'; status.textContent = 'Updated ✓';
+    document.getElementById('story-img-preview').src = url;
+    document.getElementById('story-img-preview').hidden = false;
+    document.getElementById('story-img-empty').hidden = true;
+    setTimeout(() => { bar.hidden = true; fill.style.width = '0%'; }, 1400);
+  } catch (err) {
+    showError(document.getElementById('story-img-err'), 'Upload failed: ' + err.message);
+    bar.hidden = true;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Upload Image';
+  }
+}
+
+document.getElementById('story-text-save-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('story-text-save-btn');
+  const result = document.getElementById('story-text-result');
+  const err = document.getElementById('story-text-err');
+  const text = document.getElementById('story-text-input').value.trim();
+  clearError(err); result.textContent = '';
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    const res = await api('/api/settings', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'story_text', value: text }) });
+    if (!res.ok) throw new Error(await res.text());
+    result.textContent = 'Saved ✓';
+    setTimeout(() => { result.textContent = ''; }, 2000);
+  } catch (e) {
+    showError(err, 'Save failed: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save Text';
+  }
+});
 
 // ── Saree list ─────────────────────────────────────────────────────────────
 async function loadSarees() {
