@@ -180,7 +180,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>Type / Fabric <span class="req">*</span></label>
-          <select id="type" required>
+          <select id="type-select">
             <option value="">Select type</option>
             <option>Banarasi Silk</option>
             <option>Kanjivaram Silk</option>
@@ -189,8 +189,10 @@
             <option>Organza</option>
             <option>Chiffon</option>
             <option>Cotton</option>
-            <option>Other</option>
+            <option value="__other__">Other…</option>
           </select>
+          <input type="text" id="type-custom" placeholder="Enter fabric / type" style="margin-top:8px;display:none;"/>
+          <input type="hidden" id="type" required/>
         </div>
         <div class="form-group">
           <label>Badge</label>

@@ -348,6 +348,7 @@ function openModal() { modalOverlay.hidden = false; document.body.style.overflow
 function closeModal() {
   modalOverlay.hidden = true; document.body.style.overflow = '';
   sareeForm.reset(); document.getElementById('is_sold_out').checked = false; clearError(formErr);
+  typeSelect.value = ''; typeCustom.style.display = 'none'; typeHidden.value = '';
   imageList = []; renderImageList();
   uploadStatusBar.hidden = true; uploadFill.style.width = '0%';
   imgInput.value = ''; addImgBtn.hidden = false;
@@ -369,7 +370,18 @@ function openEdit(id) {
   document.getElementById('edit-id').value = s.id;
   document.getElementById('name').value = s.name;
   document.getElementById('collection').value = s.collection || 'New Arrivals';
-  document.getElementById('type').value = s.type;
+  // Restore type — check if value exists in dropdown, else show custom input
+  const knownType = [...typeSelect.options].find(o => o.value === s.type || o.text === s.type);
+  if (knownType && knownType.value !== '__other__') {
+    typeSelect.value = knownType.value || knownType.text;
+    typeCustom.style.display = 'none';
+    typeHidden.value = s.type;
+  } else {
+    typeSelect.value = '__other__';
+    typeCustom.style.display = 'block';
+    typeCustom.value = s.type;
+    typeHidden.value = s.type;
+  }
   document.getElementById('badge').value = s.badge || '';
   document.getElementById('price').value = s.price;
   document.getElementById('original_price').value = s.original_price || '';
@@ -449,6 +461,23 @@ document.getElementById('cleanup-btn').addEventListener('click', async () => {
     btn.disabled = false; btn.textContent = 'Clean Up Storage';
   }
 });
+
+// ── Type / Fabric custom input ─────────────────────────────────────────────
+const typeSelect = document.getElementById('type-select');
+const typeCustom = document.getElementById('type-custom');
+const typeHidden = document.getElementById('type');
+
+function syncType() {
+  if (typeSelect.value === '__other__') {
+    typeCustom.style.display = 'block';
+    typeHidden.value = typeCustom.value.trim();
+  } else {
+    typeCustom.style.display = 'none';
+    typeHidden.value = typeSelect.value;
+  }
+}
+typeSelect.addEventListener('change', syncType);
+typeCustom.addEventListener('input', syncType);
 
 // ── Init ───────────────────────────────────────────────────────────────────
 loginScreen.hidden = false;
